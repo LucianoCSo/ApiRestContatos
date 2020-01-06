@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIRest_Contatos", "APIRest_Contatos.csproj", "{83F306FC-9F5F-4B76-AC01-C1D00FBA20C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83F306FC-9F5F-4B76-AC01-C1D00FBA20C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83F306FC-9F5F-4B76-AC01-C1D00FBA20C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83F306FC-9F5F-4B76-AC01-C1D00FBA20C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83F306FC-9F5F-4B76-AC01-C1D00FBA20C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9DDE43D-784A-40BA-A483-CEBD867B77C7}
+	EndGlobalSection
+EndGlobal
