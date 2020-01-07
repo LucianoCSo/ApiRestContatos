@@ -1,6 +1,8 @@
 ﻿using APIRest_Contatos.Models;
+using APIRest_Contatos.Models.Context;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace APIRest_Contatos.Services.Implementation
@@ -8,65 +10,79 @@ namespace APIRest_Contatos.Services.Implementation
     public class PessoaService : IPessoaService
     {
         private volatile int Cont;
+        private SqlContext _context;
 
-        public Pessoa Create(Pessoa pessoa)
+        public PessoaService(SqlContext context)
         {
+            _context = context;
+        }
+        public Contato Create(Contato pessoa)
+        {
+            try
+            {
+                _context.Add(pessoa);
+                _context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
             return pessoa;
         }
 
         public void Delete(long id)
         {
-        }
-
-        public IList<Pessoa> FindAll()
-        {
-            IList<Pessoa> pessoas = new List<Pessoa>();
-            for (int i = 0; i < 8; i++)
+            var result = _context.Contatos.SingleOrDefault(x => x.Id == id);
+            try
             {
-                Pessoa person = MockPessoa(i);
-                pessoas.Add(person);
+                if (result != null)
+                {
+                    _context.Contatos.Remove(result);
+                    _context.SaveChanges();
+                }
             }
-            return pessoas;
-        }
-
-        private Pessoa MockPessoa(int i)
-        {
-            return new Pessoa
+            catch (Exception ex)
             {
-                Id = IncrementeAndGet(),
-                Nome = "Luciano",
-                Endereco = "Avenida Poebla",
-                Bairro = "Jose Walter",
-                Cidade = "Fortaleza",
-                Estado = "CE",
-                Cep = "60760-180",
-                Status = 1
-            };
+                throw ex;
+            }
         }
 
-        private long IncrementeAndGet()
+        public IList<Contato> FindAll()
         {
-            return Interlocked.Increment(ref Cont);
-        }
-
-        public Pessoa FindById(long id)
-        {
-            return new Pessoa
+            try
             {
-                Id = IncrementeAndGet(),
-                Nome = "Luciano",
-                Endereco = "Avenida Poebla",
-                Bairro = "Jose Walter",
-                Cidade = "Fortaleza",
-                Estado = "CE",
-                Cep = "60760-180",
-                Status = 1
-            };
+                return _context.Contatos.ToArray();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public Pessoa Update(Pessoa pessoa)
+        public Contato FindById(long id)
         {
+            return _context.Contatos.SingleOrDefault(x => x.Id == id);
+        }
+
+        public Contato Update(Contato pessoa)
+        {
+            if (!Exist(pessoa.Id)) return new Contato();
+            var result = _context.Contatos.SingleOrDefault(x => x.Id.Equals(pessoa.Id));
+            try
+            {
+                _context.Entry(result).CurrentValues.SetValues(pessoa);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
             return pessoa;
+        }
+
+        private bool Exist(int? id)
+        {
+            return _context.Contatos.Any(x => x.Id.Equals(id));
         }
     }
 }

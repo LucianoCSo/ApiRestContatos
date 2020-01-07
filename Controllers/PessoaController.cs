@@ -31,13 +31,14 @@ namespace APIRest_Contatos.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]Pessoa person)
+        public IActionResult Post(Contato person)
         {
             if (person == null) return BadRequest();
             return new ObjectResult(_pessoaService.Create(person));
         }
-        [HttpPut("{id}")]
-        public IActionResult Put([FromBody] Pessoa person)
+
+        [HttpPut]
+        public IActionResult Put(Contato person)
         {
             if (person == null) return BadRequest();
             return new ObjectResult(_pessoaService.Update(person));

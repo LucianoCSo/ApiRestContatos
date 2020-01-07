@@ -5,10 +5,10 @@ namespace APIRest_Contatos.Services
 {
     public interface IPessoaService
     {
-        Pessoa Create(Pessoa pessoa);
-        Pessoa FindById(long id);
-        IList<Pessoa> FindAll();
-        Pessoa Update(Pessoa pessoa);
+        Contato Create(Contato pessoa);
+        Contato FindById(long id);
+        IList<Contato> FindAll();
+        Contato Update(Contato pessoa);
         void Delete(long id);
     }
 }

@@ -2,12 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using APIRest_Contatos.Models.Context;
 using APIRest_Contatos.Services;
 using APIRest_Contatos.Services.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +30,11 @@ namespace APIRest_Contatos
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            var config = Configuration["SqlConnection:SqlConnectionString"];
+
+            //var connection = @"Data Source=LUCIANOCOSTA;User ID=luciano_costa;Password=klmv2020;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            services.AddDbContext<SqlContext>(options => options.UseSqlServer(config));
 
             services.AddScoped<IPessoaService, PessoaService>();
         }
