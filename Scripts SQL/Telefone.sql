@@ -12,7 +12,14 @@
 USE [Cadastro]
 GO
 
-/****** Object:  Table [dbo].[Telefones]    Script Date: 06/01/2020 22:06:28 ******/
+ALTER TABLE [dbo].[Telefones] DROP CONSTRAINT [FK_Contatos_Telefone]
+GO
+
+/****** Object:  Table [dbo].[Telefones]    Script Date: 09/01/2020 18:30:23 ******/
+DROP TABLE [dbo].[Telefones]
+GO
+
+/****** Object:  Table [dbo].[Telefones]    Script Date: 09/01/2020 18:30:23 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -21,7 +28,7 @@ GO
 
 CREATE TABLE [dbo].[Telefones](
 	[id] [int] IDENTITY(1,1) NOT NULL,
-	[telefone] [int] NULL,
+	[telefone] [varchar](15) NULL,
 	[email] [varchar](255) NULL,
 	[site] [varchar](255) NULL,
 	[id_contato] [int] NULL,

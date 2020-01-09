@@ -1,6 +1,7 @@
 ﻿using APIRest_Contatos.Models;
 using APIRest_Contatos.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace APIRest_Contatos.Controllers
@@ -26,28 +27,49 @@ namespace APIRest_Contatos.Controllers
         public IActionResult Get(long id)
         {
             var person = _pessoaService.FindById(id);
-            if (person == null) return NotFound();
+            if (person == null) return NotFound("O contato informado não existe.");
             return Ok(person);
         }
 
         [HttpPost]
         public IActionResult Post(Contato person)
         {
-            if (person == null) return BadRequest();
-            return new ObjectResult(_pessoaService.Create(person));
+            try
+            {
+                if (person == null) return BadRequest("Erro ao tentar salvar um contato.");
+                return new ObjectResult(_pessoaService.Create(person));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("Erro ao tentar salvar um contato. " + ex.Message);
+            }
         }
 
         [HttpPut]
         public IActionResult Put(Contato person)
         {
-            if (person == null) return BadRequest();
-            return new ObjectResult(_pessoaService.Update(person));
+            try
+            {
+                if (person == null) return BadRequest("Erro ao tentar atualizar um contato.");
+                return new ObjectResult(_pessoaService.Update(person));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("Erro ao tentar atualizar um contato. " + ex.Message);
+            }
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
+        public IActionResult Delete(int id)
         {
-            _pessoaService.Delete(id);
-            return NoContent();
+            try
+            {
+                _pessoaService.Delete(id);
+                return NoContent();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("Erro ao tentar excluir um contato. " + ex.Message);
+            }
         }
     }
 }

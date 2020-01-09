@@ -14,5 +14,6 @@ namespace APIRest_Contatos.Models.Context
         }
 
         public DbSet<Contato> Contatos { get; set; }
+        public DbSet<Telefones> Telefones { get; set; }
     }
 }

@@ -33,10 +33,10 @@ namespace APIRest_Contatos
 
             var config = Configuration["SqlConnection:SqlConnectionString"];
 
-            //var connection = @"Data Source=LUCIANOCOSTA;User ID=luciano_costa;Password=klmv2020;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<SqlContext>(options => options.UseSqlServer(config));
 
             services.AddScoped<IPessoaService, PessoaService>();
+            services.AddScoped<ITelefoneService, TelefoneService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

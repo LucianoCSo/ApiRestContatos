@@ -9,7 +9,6 @@ namespace APIRest_Contatos.Services.Implementation
 {
     public class PessoaService : IPessoaService
     {
-        private volatile int Cont;
         private SqlContext _context;
 
         public PessoaService(SqlContext context)
@@ -24,8 +23,8 @@ namespace APIRest_Contatos.Services.Implementation
                 _context.SaveChanges();
             }
             catch(Exception ex)
-            {
-                throw ex;
+            {             
+                throw new Exception(ex.Message);
             }
             return pessoa;
         }
