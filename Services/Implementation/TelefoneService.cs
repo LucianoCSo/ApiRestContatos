@@ -1,5 +1,6 @@
 ﻿using APIRest_Contatos.Models;
 using APIRest_Contatos.Models.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,7 @@ namespace APIRest_Contatos.Services.Implementation
         {
             try
             {
-                return _context.Telefones.ToList();
+                return _context.Telefones.Include(x => x.Contato).ToList();
             }
             catch(Exception ex)
             {
